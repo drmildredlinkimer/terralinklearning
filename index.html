@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instrumento de Evaluación de Adecuación Tecnológica</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        
+        :root {
+            --azul-institucional: #002453;
+            --verde-primario: #648b1a;
+            --verde-secundario: #4a7c3d;
+            --dorado-acento: #9c8315;
+            --morado-secundario: #393264;
+            --gris-texto: #53565a;
+            --negro-profundo: #131b12;
+            --blanco: #ffffff;
+        }
+
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: #f1f5f9; 
+            color: var(--negro-profundo); 
+            line-height: 1.6;
+        }
+
+        .header-gradient {
+            background: linear-gradient(135deg, var(--azul-institucional) 0%, var(--morado-secundario) 100%);
+        }
+
+        .btn-principal { 
+            background-color: var(--verde-primario); 
+            transition: all 0.2s ease; 
+            color: white;
+            font-weight: 600;
+        }
+        .btn-principal:hover { 
+            background-color: var(--verde-secundario); 
+            transform: translateY(-1px);
+        }
+        
+        .step-content { display: none; }
+        .step-content.active { display: block; animation: fadeIn 0.4s ease-out; }
+        
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        
+        .scenario-card { 
+            transition: all 0.2s ease; 
+            border: 1px solid #e2e8f0; 
+            cursor: pointer; 
+            background: white; 
+            border-radius: 1rem;
+        }
+        .scenario-card:hover { border-color: var(--dorado-acento); transform: scale(1.01); }
+        .scenario-active { 
+            border-color: var(--verde-primario); 
+            background: #f7fee7 !important; 
+            border-width: 2px;
+            box-shadow: 0 4px 12px rgba(100, 139, 26, 0.1);
+        }
+
+        input[type=range] { -webkit-appearance: none; width: 100%; background: transparent; }
+        input[type=range]::-webkit-slider-runnable-track { 
+            width: 100%; height: 8px; background: #e2e8f0; border-radius: 4px; 
+        }
+        input[type=range]::-webkit-slider-thumb { 
+            -webkit-appearance: none; height: 22px; width: 22px; border-radius: 50%; 
+            background: var(--verde-primario); cursor: pointer; margin-top: -7px; 
+            border: 2px solid white; box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
+        }
+
+        .text-sm-custom { font-size: 0.875rem; }
+        .text-base-custom { font-size: 1rem; }
+        .text-lg-custom { font-size: 1.125rem; }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+
+<div class="max-w-6xl mx-auto bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-100">
+    <!-- HEADER -->
+    <header class="header-gradient text-white p-8 border-b-4 border-[#9c8315]">
+        <div class="flex justify-between items-center">
+            <div>
+                <span class="text-[10px] px-2 py-0.5 rounded-full border border-white/30 uppercase tracking-[0.2em] mb-2 inline-block font-bold">Instrumento Técnico de Evaluación</span>
+                <h1 class="text-3xl font-bold tracking-tight">Adecuación Tecnológica Institucional</h1>
+                <p class="text-blue-100 text-sm mt-1">Metodología de análisis multivariable para la transición energética.</p>
+            </div>
+            <div class="text-right hidden md:block border-l border-white/20 pl-6">
+                <p class="text-[10px] text-blue-200 uppercase tracking-widest font-bold">Entorno Académico</p>
+                <p class="text-sm font-semibold">Módulo: Tecnologías Renovables</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- NAVIGATION -->
+    <nav class="bg-white border-b flex text-[11px] font-bold uppercase tracking-wider text-center">
+        <button id="btn-step1" onclick="changeStep(1)" class="flex-1 py-4 border-b-2 border-blue-900 text-blue-900 bg-blue-50/50">1. Fundamentos del Análisis</button>
+        <button id="btn-step2" onclick="changeStep(2)" class="flex-1 py-4 border-b-2 border-transparent text-gray-400">2. Configuración de Escenario</button>
+        <button id="btn-step3" onclick="changeStep(3)" class="flex-1 py-4 border-b-2 border-transparent text-gray-400">3. Resultados y Dictamen</button>
+    </nav>
+
+    <!-- STEP 1: FUNDAMENTOS (DETALLADO) -->
+    <main id="step1" class="step-content active p-8 md:p-12">
+        <div class="grid lg:grid-cols-2 gap-12 items-center mb-12">
+            <div>
+                <h2 class="text-3xl font-bold text-[#002453] mb-6">Marco Metodológico de Evaluación</h2>
+                <p class="text-gray-600 text-lg-custom leading-relaxed mb-6">
+                    La evaluación de una tecnología renovable no es un ejercicio lineal basado únicamente en el costo. Este instrumento aplica una lógica de <strong>adecuación institucional</strong> que pondera tres dimensiones críticas para garantizar que la solución propuesta sea viable en el contexto específico del decisor.
+                </p>
+                <div class="bg-blue-50 p-6 rounded-2xl border-l-4 border-blue-900 shadow-sm">
+                    <p class="text-sm-custom text-blue-900 font-medium">
+                        "La tecnología más adecuada no es siempre la más barata a nivel global, sino aquella que logra el mejor equilibrio entre la capacidad de gestión de la institución, la disponibilidad del recurso en el territorio y la resiliencia ante el cambio climático."
+                    </p>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 gap-6">
+                <div class="p-6 bg-slate-50 rounded-2xl border border-slate-200 shadow-sm">
+                    <h3 class="font-bold text-[#393264] text-xs uppercase mb-3 tracking-widest">Dimensión Institucional y Escala</h3>
+                    <p class="text-sm-custom text-gray-600">Determina si la organización posee el marco legal, técnico y financiero para operar la tecnología. Una central utilitaria requiere gestión ministerial, mientras que sistemas distribuidos son óptimos para municipios o cooperativas.</p>
+                </div>
+                <div class="p-6 bg-slate-50 rounded-2xl border border-slate-200 shadow-sm">
+                    <h3 class="font-bold text-[#648b1a] text-xs uppercase mb-3 tracking-widest">Dimensión de Recurso y Localización</h3>
+                    <p class="text-sm-custom text-gray-600">Analiza la presencia geográfica del recurso. Mientras el sol es universal, la bioenergía, geotermia e hídrica dependen de nichos específicos, lo que introduce riesgos logísticos y límites de techo de capacidad en la matriz.</p>
+                </div>
+                <div class="p-6 bg-slate-50 rounded-2xl border border-slate-200 shadow-sm">
+                    <h3 class="font-bold text-[#9c8315] text-xs uppercase mb-3 tracking-widest">Dimensión Estratégica y Resiliencia</h3>
+                    <p class="text-sm-custom text-gray-600">Prioriza la seguridad de suministro frente a la variabilidad climática regional (Fenómenos de El Niño/La Niña), evaluando la capacidad de la tecnología para actuar como carga base o soporte de red.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex justify-center">
+            <button onclick="changeStep(2)" class="btn-principal px-12 py-5 rounded-xl shadow-lg flex items-center gap-3 text-sm tracking-widest uppercase">
+                Ir a Configuración de Escenario
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+            </button>
+        </div>
+    </main>
+
+    <!-- STEP 2: CONFIGURATION -->
+    <section id="step2" class="step-content p-6 md:p-10">
+        <div class="grid lg:grid-cols-12 gap-10">
+            
+            <!-- ESCENARIOS CON DETALLE EXTENDIDO -->
+            <div class="lg:col-span-7 space-y-6">
+                <h3 class="font-bold text-[10px] uppercase tracking-[0.2em] text-gray-400 mb-2">Escenarios de Aprendizaje Regional</h3>
+                
+                <div onclick="loadScenario('resiliencia', this)" class="scenario-btn scenario-card p-6 border-l-4 border-l-transparent">
+                    <div class="flex justify-between items-center mb-4">
+                        <h4 class="font-bold text-base-custom text-[#002453]">Escenario A: Estrés Hídrico y Seguridad de Red</h4>
+                        <span class="text-xl">💧</span>
+                    </div>
+                    <p class="text-xs text-gray-500 leading-relaxed mb-4">
+                        Bajo el impacto recurrente del <strong>Fenómeno de El Niño</strong> en la región, la generación hidroeléctrica de embalse cae por debajo del 40% de su capacidad. Este escenario obliga al tomador de decisiones nacional a priorizar fuentes de <strong>carga base no hídrica</strong> para evitar el racionamiento eléctrico y reducir la quema de combustibles fósiles importados de alto costo térmico.
+                    </p>
+                    <div class="flex gap-4">
+                        <span class="text-[9px] font-bold uppercase px-3 py-1 bg-slate-100 rounded text-[#9c8315]">Prioridad: Resiliencia</span>
+                        <span class="text-[9px] font-bold uppercase px-3 py-1 bg-slate-100 rounded text-gray-500">Factor: 1.15x (Sobrecosto por Crisis)</span>
+                    </div>
+                </div>
+
+                <div onclick="loadScenario('distribuida', this)" class="scenario-btn scenario-card p-6 border-l-4 border-l-transparent">
+                    <div class="flex justify-between items-center mb-4">
+                        <h4 class="font-bold text-base-custom text-[#002453]">Escenario B: Eficiencia y Gestión Municipal</h4>
+                        <span class="text-xl">🏛️</span>
+                    </div>
+                    <p class="text-xs text-gray-500 leading-relaxed mb-4">
+                        Enfoque en <strong>Descentralización Energética</strong>. Un gobierno local busca reducir drásticamente el gasto corriente en alumbrado y edificios públicos. Se aprovecha un marco regulatorio de fomento a la generación distribuida. La prioridad es el retorno de inversión rápido y la facilidad de mantenimiento dentro de un entorno urbano consolidado.
+                    </p>
+                    <div class="flex gap-4">
+                        <span class="text-[9px] font-bold uppercase px-3 py-1 bg-slate-100 rounded text-[#648b1a]">Prioridad: Costo</span>
+                        <span class="text-[9px] font-bold uppercase px-3 py-1 bg-slate-100 rounded text-gray-500">Factor: 0.85x (Incentivos Fiscales)</span>
+                    </div>
+                </div>
+
+                <div onclick="loadScenario('nexo', this)" class="scenario-btn scenario-card p-6 border-l-4 border-l-transparent">
+                    <div class="flex justify-between items-center mb-4">
+                        <h4 class="font-bold text-base-custom text-[#002453]">Escenario C: Nexo Agua-Energía-Agroindustria</h4>
+                        <span class="text-xl">☕</span>
+                    </div>
+                    <p class="text-xs text-gray-500 leading-relaxed mb-4">
+                        Orientado al <strong>Fortalecimiento Productivo</strong> de sectores clave como el café o el azúcar. El objetivo es convertir los pasivos ambientales (residuos orgánicos) en activos energéticos. Se busca la soberanía energética del sector para protegerlo de las fluctuaciones de los precios de mercado y mejorar la competitividad de las exportaciones regionales.
+                    </p>
+                    <div class="flex gap-4">
+                        <span class="text-[9px] font-bold uppercase px-3 py-1 bg-slate-100 rounded text-[#393264]">Prioridad: Soberanía</span>
+                        <span class="text-[9px] font-bold uppercase px-3 py-1 bg-slate-100 rounded text-gray-500">Factor: 1.00x (Neutral)</span>
+                    </div>
+                </div>
+
+                <div onclick="loadScenario('aislada', this)" class="scenario-btn scenario-card p-6 border-l-4 border-l-transparent">
+                    <div class="flex justify-between items-center mb-4">
+                        <h4 class="font-bold text-base-custom text-[#002453]">Escenario D: Logística y Autonomía Insular</h4>
+                        <span class="text-xl">🚢</span>
+                    </div>
+                    <p class="text-xs text-gray-500 leading-relaxed mb-4">
+                        Simulación de proyectos en <strong>Zonas de Difícil Acceso</strong> o sistemas insulares. La logística de transporte de combustibles es costosa y de alto riesgo ambiental. Se priorizan tecnologías robustas que utilicen el recurso local, minimicen la necesidad de repuestos complejos importados y aseguren la continuidad de servicios básicos.
+                    </p>
+                    <div class="flex gap-4">
+                        <span class="text-[9px] font-bold uppercase px-3 py-1 bg-slate-100 rounded text-[#53565a]">Prioridad: Soberanía</span>
+                        <span class="text-[9px] font-bold uppercase px-3 py-1 bg-slate-100 rounded text-gray-500">Factor: 1.40x (Sobrecosto Logístico)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CONTROLES -->
+            <div class="lg:col-span-5 bg-slate-50 p-8 rounded-3xl border border-slate-200 space-y-8">
+                <div>
+                    <label class="block font-bold text-xs text-[#002453] uppercase mb-4 tracking-wider">1. Perfil Institucional</label>
+                    <select id="input-perfil" class="w-full p-4 rounded-xl border border-gray-200 focus:border-[#648b1a] outline-none text-sm font-medium bg-white">
+                        <option value="gob">Autoridad Nacional / Ministerio de Energía</option>
+                        <option value="mun">Administración Local / Municipalidad</option>
+                        <option value="ind">Sector Productivo / Agroindustria</option>
+                        <option value="coop">Cooperativa Rural / Comunidad Aislada</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block font-bold text-xs text-[#002453] uppercase mb-4 tracking-wider">2. Prioridad Estratégica</label>
+                    <div class="grid grid-cols-1 gap-2">
+                        <button onclick="setPriority('costo', this)" class="priority-btn p-4 border border-gray-200 rounded-xl text-xs font-bold transition-all bg-white hover:border-[#648b1a] uppercase text-left">Optimización de Inversión (Costo LCOE)</button>
+                        <button onclick="setPriority('clima', this)" class="priority-btn p-4 border border-gray-200 rounded-xl text-xs font-bold transition-all bg-white hover:border-[#648b1a] uppercase text-left">Resiliencia y Blindaje Climático</button>
+                        <button onclick="setPriority('soberania', this)" class="priority-btn p-4 border border-gray-200 rounded-xl text-xs font-bold transition-all bg-white hover:border-[#648b1a] uppercase text-left">Soberanía y Uso de Insumos Locales</button>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
+                    <div class="flex justify-between items-center mb-4">
+                        <label class="block font-bold text-xs text-[#002453] uppercase tracking-wider">3. Ajuste de Factor de Costo País</label>
+                        <span id="val-factor" class="text-xl font-bold text-gray-400">1.00x</span>
+                    </div>
+                    <input type="range" id="input-factor" min="0.70" max="1.50" step="0.05" value="1.00" oninput="updateExplainers()" class="mb-4">
+                    
+                    <div id="factor-explainer" class="p-5 rounded-xl text-xs leading-relaxed transition-all min-h-[120px] bg-slate-50 border border-slate-100 font-medium italic">
+                        <!-- Inyectado por JS -->
+                    </div>
+                </div>
+
+                <button onclick="generateResults()" class="w-full btn-principal py-5 rounded-2xl shadow-xl uppercase tracking-widest text-sm flex items-center justify-center gap-3">
+                    Analizar Grado de Adecuación
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- STEP 3: RESULTS -->
+    <section id="step3" class="step-content p-6 md:p-10">
+        <div class="flex flex-col lg:flex-row gap-10">
+            <div class="flex-1">
+                <div class="mb-8">
+                    <h2 class="text-3xl font-bold text-[#002453]">Resultado de la Simulación Técnica</h2>
+                    <p id="resumen-escenario" class="text-gray-500 text-xs mt-1 border-l-4 border-[#648b1a] pl-4 font-medium uppercase tracking-wider"></p>
+                </div>
+
+                <div class="overflow-hidden rounded-2xl border border-slate-100 shadow-xl bg-white">
+                    <table class="w-full text-left text-sm">
+                        <thead class="bg-slate-50 font-bold uppercase text-[10px] text-gray-400 border-b">
+                            <tr>
+                                <th class="p-5">Tecnología Evaluada</th>
+                                <th class="p-5 text-center">Costo Est. ($/kWh)</th>
+                                <th class="p-5">Estado Recurso</th>
+                                <th class="p-5">Adecuación (%)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabla-body" class="divide-y divide-gray-50">
+                            <!-- Dinámico -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- ANALISIS DETALLADO -->
+            <div class="lg:w-96 space-y-6">
+                <div class="p-8 header-gradient text-white rounded-3xl shadow-xl">
+                    <h3 class="text-[10px] font-bold text-[#9c8315] uppercase tracking-[0.25em] mb-8 border-b border-white/10 pb-4">Dictamen Estratégico Detallado</h3>
+                    <div id="analisis-texto" class="text-xs space-y-6 text-blue-50 leading-relaxed">
+                        <!-- Dinámico -->
+                    </div>
+                </div>
+
+                <div class="p-6 bg-[#fffcf0] border border-[#9c8315]/20 rounded-2xl shadow-sm">
+                    <h4 class="text-[10px] font-bold text-[#9c8315] mb-3 uppercase tracking-widest">Hibridación Recomendada</h4>
+                    <p id="hibridacion-tip" class="text-xs text-gray-700 font-semibold leading-relaxed italic"></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-12 flex justify-center gap-6">
+            <button onclick="changeStep(2)" class="text-gray-400 font-bold text-xs hover:text-[#648b1a] transition-colors uppercase tracking-widest">← Reconfigurar Escenario</button>
+        </div>
+    </section>
+
+    <!-- FOOTER (APA) -->
+    <footer class="p-12 bg-slate-50 text-center border-t border-slate-200">
+        <p class="text-[10px] text-gray-400 uppercase tracking-[0.3em] mb-6 font-bold">Fuentes de Datos y Referencias Bibliográficas</p>
+        <div class="text-[11px] text-gray-500 space-y-3 max-w-4xl mx-auto italic">
+            <p>IRENA. (2024). <em>Renewable power generation costs in 2023</em>. Abu Dhabi: International Renewable Energy Agency.</p>
+            <p>OLADE. (2023). <em>Panorama Energético de América Latina y el Caribe 2023</em>. Quito: Organización Latinoamericana de Energía.</p>
+            <p>SICA. (2020). <em>Estrategia Energética Sustentable 2030 (EES 2030)</em>. San Salvador: Sistema de la Integración Centroamericana.</p>
+        </div>
+        <div class="mt-10 pt-10 border-t border-gray-200 text-[10px] text-gray-400 leading-relaxed max-w-3xl mx-auto">
+            <strong class="text-gray-600 block mb-2 uppercase tracking-widest">Descargo de Responsabilidad del Curso</strong>
+            Este instrumento es un recurso interactivo de simulación diseñado para el ejercicio práctico del curso. Los algoritmos de adecuación reflejan modelos teóricos de planificación estratégica y no sustituyen los estudios oficiales de factibilidad técnica, análisis de interconexión o evaluaciones de impacto ambiental requeridas por las normativas nacionales de cada Estado Miembro.
+        </div>
+    </footer>
+</div>
+
+<script>
+    let currentPriority = 'costo';
+    
+    // DB con lógica de Disponibilidad y Techo de Capacidad
+    const db = [
+        { id: 'solar_u', nombre: 'Solar Fotovoltaica (Utilitaria)', icono: '🌞', lcoe: 0.044, res: 75, minerals: 90, scale: ['gob', 'ind'], resource_universal: 1.0, info: 'Escala de Red', capacity_ceiling: 1.0 },
+        { id: 'solar_dist', nombre: 'Solar Fotovoltaica (Distribuida)', icono: '🏠', lcoe: 0.082, res: 80, minerals: 90, scale: ['mun', 'coop'], resource_universal: 1.0, info: 'Sistemas Urbanos', capacity_ceiling: 0.7 },
+        { id: 'wind', nombre: 'Eólica Onshore', icono: '🌬️', lcoe: 0.033, res: 60, minerals: 85, scale: ['gob', 'ind'], resource_universal: 0.6, info: 'Recurso Variable', capacity_ceiling: 0.8 },
+        { id: 'hydro', nombre: 'Hidroeléctrica (Embalse)', icono: '🌊', lcoe: 0.057, res: 30, minerals: 30, scale: ['gob', 'coop'], resource_universal: 0.5, info: 'Carga Base/Pico', capacity_ceiling: 0.9 },
+        { id: 'geo', nombre: 'Geotérmica', icono: '🌋', lcoe: 0.071, res: 98, minerals: 20, scale: ['gob', 'ind'], resource_universal: 0.2, info: 'Base Continua', capacity_ceiling: 0.3 },
+        { id: 'bio', nombre: 'Bioenergía (Residuos/Biomasa)', icono: '🌿', lcoe: 0.065, res: 85, minerals: 15, scale: ['ind', 'coop'], resource_universal: 0.3, info: 'Nexo Productivo', capacity_ceiling: 0.2 }
+    ];
+
+    function changeStep(n) {
+        document.querySelectorAll('.step-content').forEach(s => s.classList.remove('active'));
+        document.getElementById('step' + n).classList.add('active');
+        for(let i=1; i<=3; i++) {
+            const btn = document.getElementById('btn-step'+i);
+            btn.className = "flex-1 py-4 border-b-2 text-gray-400 transition-all border-transparent";
+            if(i === n) btn.className = "flex-1 py-4 border-b-2 text-blue-900 transition-all border-blue-900 bg-blue-50/50";
+        }
+        window.scrollTo(0, 0);
+    }
+
+    function setPriority(p, btn) {
+        currentPriority = p;
+        document.querySelectorAll('.priority-btn').forEach(b => {
+            b.classList.remove('border-[#648b1a]', 'bg-green-50', 'text-[#648b1a]');
+            b.classList.add('border-gray-200', 'text-gray-400');
+        });
+        if(btn) btn.classList.add('border-[#648b1a]', 'bg-green-50', 'text-[#648b1a]');
+    }
+
+    function loadScenario(type, element) {
+        document.querySelectorAll('.scenario-btn').forEach(b => b.classList.remove('scenario-active'));
+        element.classList.add('scenario-active');
+        const factor = document.getElementById('input-factor');
+        const perfil = document.getElementById('input-perfil');
+        const btns = document.querySelectorAll('.priority-btn');
+
+        if(type === 'resiliencia') {
+            factor.value = 1.15; perfil.value = 'gob'; setPriority('clima', btns[1]);
+        } else if(type === 'distribuida') {
+            factor.value = 0.85; perfil.value = 'mun'; setPriority('costo', btns[0]);
+        } else if(type === 'nexo') {
+            factor.value = 1.00; perfil.value = 'ind'; setPriority('soberania', btns[2]);
+        } else if(type === 'aislada') {
+            factor.value = 1.40; perfil.value = 'coop'; setPriority('soberania', btns[2]);
+        }
+        updateExplainers();
+    }
+
+    function updateExplainers() {
+        const factor = parseFloat(document.getElementById('input-factor').value);
+        const label = document.getElementById('val-factor');
+        const explainer = document.getElementById('factor-explainer');
+        label.innerText = `${factor.toFixed(2)}x`;
+        
+        if(factor < 1) {
+            explainer.className = "p-5 rounded-xl text-xs leading-relaxed bg-green-50 text-green-800 border border-green-100 italic font-medium";
+            explainer.innerHTML = `<strong>Ajuste de Fomento Político:</strong> Simula un entorno con exención de aranceles de importación para componentes energéticos, acceso a financiamiento preferencial de organismos multilaterales o políticas de subsidio a la descarbonización.`;
+            label.className = "text-xl font-bold text-[#648b1a]";
+        } else if(factor > 1) {
+            explainer.className = "p-5 rounded-xl text-xs leading-relaxed bg-amber-50 text-amber-800 border border-amber-100 italic font-medium";
+            explainer.innerHTML = `<strong>Ajuste de Restricción País:</strong> Representa sobrecostos logísticos derivados de una topografía accidentada, debilidad en la red de transmisión nacional que requiere inversiones adicionales de interconexión o logística insular/aislada compleja.`;
+            label.className = "text-xl font-bold text-[#9c8315]";
+        } else {
+            explainer.className = "p-5 rounded-xl text-xs leading-relaxed bg-slate-50 text-slate-500 border border-slate-100 italic font-medium";
+            explainer.innerHTML = `<strong>Referencia Estándar (IRENA, 2024):</strong> Utiliza el promedio internacional de costos nivelados de generación para tecnologías renovables instaladas en condiciones de mercado y logística equilibradas.`;
+            label.className = "text-xl font-bold text-slate-400";
+        }
+    }
+
+    function generateResults() {
+        const factor = parseFloat(document.getElementById('input-factor').value);
+        const perfil = document.getElementById('input-perfil').value;
+        const body = document.getElementById('tabla-body');
+        const analisis = document.getElementById('analisis-texto');
+        const tip = document.getElementById('hibridacion-tip');
+        
+        body.innerHTML = '';
+        const perfilText = document.getElementById('input-perfil').options[document.getElementById('input-perfil').selectedIndex].text;
+        document.getElementById('resumen-escenario').innerText = `${perfilText} | Enfoque: ${currentPriority.toUpperCase()}`;
+
+        const results = db.map(t => {
+            const costoReal = t.lcoe * factor;
+            let score = 0;
+            
+            // 1. Alineación Institucional (35%)
+            let escalaMatch = t.scale.includes(perfil) ? 35 : 10;
+            // Penalización por escala para gobiernos nacionales en tecnologías de bajo techo (Bio/Geo)
+            if(perfil === 'gob' && t.capacity_ceiling < 0.5) escalaMatch -= 15;
+
+            // 2. Prioridad Estratégica (40%)
+            let pScore = 0;
+            if(currentPriority === 'costo') pScore = (0.033 / costoReal) * 40;
+            if(currentPriority === 'clima') pScore = (t.res / 100) * 40;
+            if(currentPriority === 'soberania') pScore = (1 - (t.minerals / 100)) * 40;
+
+            // 3. Disponibilidad del Recurso (25%)
+            let localAvailability = t.resource_universal;
+            if (perfil === 'ind' && t.id === 'bio') localAvailability = 0.95; 
+            
+            const rScore = localAvailability * 25;
+            score = Math.min(Math.round(escalaMatch + pScore + rScore), 100);
+
+            return { ...t, costoReal, score, localAvailability };
+        }).sort((a, b) => b.score - a.score);
+
+        results.forEach(t => {
+            // Sincronización de etiquetas
+            let availText = "Baja / Sitio Crítico";
+            let availColor = "text-red-600";
+            if(t.localAvailability > 0.8) { availText = "Alta / Universal"; availColor = "text-green-600"; }
+            else if(t.localAvailability > 0.4) { availText = "Media / Localizada"; availColor = "text-amber-600"; }
+            
+            body.innerHTML += `
+                <tr class="hover:bg-slate-50 transition-colors border-b border-gray-50">
+                    <td class="p-5">
+                        <div class="font-bold text-gray-800 text-sm">${t.icono} ${t.nombre}</div>
+                        <span class="text-[9px] text-gray-400 font-bold uppercase tracking-wider">${t.info}</span>
+                    </td>
+                    <td class="p-5 text-center font-mono font-bold text-gray-600">$${t.costoReal.toFixed(3)}</td>
+                    <td class="p-5 text-[10px] font-bold ${availColor} uppercase">${availText}</td>
+                    <td class="p-5">
+                        <div class="flex items-center gap-3">
+                            <div class="flex-1 h-2.5 bg-slate-100 rounded-full overflow-hidden shadow-inner">
+                                <div class="bg-[#648b1a] h-full transition-all duration-1000" style="width: ${t.score}%"></div>
+                            </div>
+                            <span class="text-xs font-bold w-8 text-right">${t.score}%</span>
+                        </div>
+                    </td>
+                </tr>
+            `;
+        });
+
+        const top = results[0];
+        // Dictamen con sincronización lógica de recurso
+        analisis.innerHTML = `
+            <div class="border-l-2 border-[#9c8315] pl-4">
+                <p class="font-bold text-white mb-2 uppercase tracking-widest text-[9px]">Análisis de Idoneidad de Perfil</p>
+                <p>La opción de <strong>${top.nombre}</strong> lidera el ranking debido a su alineación con el perfil de <strong>${perfilText}</strong>. Su estructura de gestión técnica y financiera se adapta a la capacidad institucional simulada.</p>
+            </div>
+            <div class="border-l-2 border-blue-400 pl-4">
+                <p class="font-bold text-white mb-2 uppercase tracking-widest text-[9px]">Seguridad Energética Regional</p>
+                <p>Al priorizar esta tecnología, se optimiza la seguridad de suministro para el escenario de <strong>${currentPriority}</strong>. Sin embargo, su éxito para la matriz regional depende de la hibridación con recursos de mayor universalidad espacial.</p>
+            </div>
+            <div class="border-l-2 border-red-400 pl-4">
+                <p class="font-bold text-white mb-2 uppercase tracking-widest text-[9px]">Restricción Crítica de Recurso</p>
+                <p>Es fundamental notar que tecnologías como la <strong>Geotermia o Bioenergía</strong> suelen mostrar una disponibilidad "Baja / Sitio Crítico". Esto implica que, aunque su adecuación institucional sea alta, su potencial de escala está geográficamente limitado, lo que exige estudios de sitio exhaustivos y prohíbe su uso como base única de expansión masiva.</p>
+            </div>
+        `;
+
+        const tips = {
+            'solar_u': "Hibridación con Hidroeléctrica: Utilizar la abundancia solar diurna para preservar los niveles de embalse, utilizándolos como batería natural para el despacho en horas pico nocturnas.",
+            'solar_dist': "Micro-Redes con Almacenamiento: Integrar sistemas BESS para mitigar la intermitencia local y asegurar servicios municipales críticos durante perturbaciones de la red central.",
+            'wind': "Sinergia Estacional Hídrica: Aprovechar que los periodos de mayor velocidad de viento en la región coinciden con la temporada seca (alisios), compensando la baja hidrología.",
+            'hydro': "Solar Flotante (FPV): Instalar paneles sobre el espejo de agua de los embalses. Reduce la evaporación del recurso hídrico vital y optimiza la infraestructura de transmisión existente.",
+            'geo': "Respaldo de Estabilidad: Dada su alta continuidad operativa (98%), debe ser el ancla técnica que permita la integración masiva de fuentes variables (Solar/Eólica) sin afectar la frecuencia.",
+            'bio': "Cogeneración Circular: Diseñar el sistema para satisfacer la demanda térmica de procesos agroindustriales locales y verter excedentes eléctricos a la red de baja tensión rural."
+        };
+        tip.innerText = tips[top.id] || "Se recomienda un análisis de hibridación técnica específica para mitigar riesgos de variabilidad.";
+        changeStep(3);
+    }
+
+    window.onload = () => { updateExplainers(); setPriority('costo', document.querySelectorAll('.priority-btn')[0]); };
+</script>
+</body>
+</html>
