@@ -630,6 +630,27 @@ export const SolarRed: React.FC = () => {
 				title="¿Quieres luz en un apagón?"
 				sub="Necesitas baterías y un inversor híbrido."
 			/>
+			{f >= T.end + 20 && (
+				<div
+					style={{
+						position: 'absolute',
+						top: 500,
+						left: 70,
+						padding: '22px 36px',
+						borderRadius: 999,
+						backgroundColor: C.sun,
+						color: C.bgDay,
+						fontFamily: FONT,
+						fontSize: 44,
+						fontWeight: 800,
+						opacity: interpolate(f, [T.end + 20, T.end + 32], [0, 1], {extrapolateRight: 'clamp'}),
+						transform: `scale(${spring({frame: f - T.end - 20, fps, config: {damping: 10}})})`,
+						transformOrigin: 'left center',
+					}}
+				>
+					Sígueme para la parte 2 →
+				</div>
+			)}
 
 			{/* firma */}
 			<div
